@@ -80,6 +80,8 @@ import org.supercsv.io.CsvMapReader;
 import org.supercsv.io.ICsvMapReader;
 import org.supercsv.prefs.CsvPreference;
 
+import cn.idempiere.util.LCN;
+
 /**
  * CSV Importer for GridTab
  * @author Carlos Ruiz
@@ -156,7 +158,10 @@ public class GridTabCSVImporter implements IGridTabImporter
 			if (p_quoteChar != null)
 				quoteChar = p_quoteChar;
 			CsvPreference csvpref = new CsvPreference.Builder(quoteChar.charAt(0), delimiterChar.charAt(0), "\r\n" /* ignored */).build();
-
+			
+			//LCN-ICZI84
+			LCN.importCSVBefore(filestream,charset);
+			
 			mapReader = new CsvMapReader(new InputStreamReader(filestream, charset), csvpref);
 			header =  Arrays.asList(mapReader.getHeader(true));  
 

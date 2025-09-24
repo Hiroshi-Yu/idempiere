@@ -62,6 +62,8 @@ import org.supercsv.io.CsvMapWriter;
 import org.supercsv.io.ICsvMapWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import cn.idempiere.util.LCN;
+
 /**
  * CSV Exporter for GridTab
  * @author Carlos Ruiz
@@ -80,7 +82,11 @@ public class GridTabCSVExporter implements IGridTabExporter
 		MTable table= null;
 		MTable tableDetail = null;
 		try {
-			FileOutputStream fileOut = new FileOutputStream (file); 			
+			FileOutputStream fileOut = new FileOutputStream (file);
+			
+			//LCN-ICZI84
+			LCN.exportCSVBefore(fileOut, Ini.getCharset());
+
 			OutputStreamWriter oStrW = new OutputStreamWriter(fileOut, Ini.getCharset());
 			BufferedWriter bw = new BufferedWriter(oStrW); 
 			mapWriter = new CsvMapWriter(bw, CsvPreference.STANDARD_PREFERENCE);
