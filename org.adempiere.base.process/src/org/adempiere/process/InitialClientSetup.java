@@ -273,7 +273,8 @@ public class InitialClientSetup extends SvrProcess
 		MSetup ms = new MSetup(Env.getCtx(), WINDOW_THIS_PROCESS, isDryRun);
 		try {
 			if (! ms.createClient(p_ClientName, p_OrgValue, p_OrgName, p_AdminUserName, p_NormalUserName
-					, p_Phone, p_Phone2, p_Fax, p_EMail, p_TaxID, p_AdminUserEmail, p_NormalUserEmail, p_IsSetInitialPassword)) {
+					// LCN-D06L2
+					, p_Phone, p_Phone2, p_Fax, p_EMail, p_TaxID, p_AdminUserEmail, p_NormalUserEmail, p_IsSetInitialPassword,p_C_Country_ID)) {
 				ms.rollback();
 				throw new AdempiereException(Msg.getMsg(Env.getCtx(), "Create client failed"));
 			}

@@ -137,7 +137,8 @@ public final class MSetup
 	 */
 	public boolean createClient (String clientName, String orgValue, String orgName,
 		String userClient, String userOrg, String phone, String phone2, String fax, String eMail, String taxID,
-		String adminEmail, String userEmail, boolean isSetInitialPassword)
+		// LCN-ID06L2
+		String adminEmail, String userEmail, boolean isSetInitialPassword,int countryID)
 	{
 		log.info(clientName);
 		m_trx.setDisplayName(TRX_DISPLAYNAME);
@@ -162,6 +163,10 @@ public final class MSetup
 		if (MSystem.isUseLoginPrefix())
 			m_client.setLoginPrefix(m_clientName);
 		m_client.setName(m_clientName);
+
+		// LCN-ID06L2
+		m_client.setAD_Language((MCountry.get(countryID)).getAD_Language());
+		
 		if (!m_client.save())
 		{
 			String err = "Tenant NOT created";
